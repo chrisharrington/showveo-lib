@@ -20,6 +20,7 @@ node_modules/
 
 *.js
 *.js.map
+!dist/index.js
 
 !webpack.config.js
 !metro.config.js
@@ -31,5 +32,4 @@ node_modules/
 
 db/
 queue/
-dist/
 
