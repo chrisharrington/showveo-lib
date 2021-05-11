@@ -18,9 +18,7 @@ node_modules/
 
 .env
 
-*.js
 *.js.map
-!dist/index.js
 
 !webpack.config.js
 !metro.config.js
