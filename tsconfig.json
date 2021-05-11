@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "paths": {
+            "@lib/*": ["./*"]
+        },
+        "skipLibCheck": true,
+        "declaration": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        "./node_modules/@types/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
