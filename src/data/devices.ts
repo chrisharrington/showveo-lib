@@ -15,9 +15,9 @@ class DeviceService extends BaseService {
             host: castable.options.device.host
         };
 
-        if (castable.type === PlayableType.Movie)
+        if (castable.playable.type === PlayableType.Movie)
             params.movieId = castable.playable._id;
-        else if (castable.type === PlayableType.Episode)
+        else if (castable.playable.type === PlayableType.Episode)
             params.episodeId = castable.playable._id;
 
         await this.post(`${Config.ApiUrl}/devices/cast`, params);

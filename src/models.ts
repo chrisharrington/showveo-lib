@@ -10,10 +10,10 @@ export enum Status {
 }
 
 export enum CastState {
-    NoDevicesAvailable = "NoDevicesAvailable",
-    NotConnected = "NotConnected",
-    Connecting = "Connecting",
-    Connected = "Connected"
+    Idle = 'IDLE',
+    Paused = 'PAUSED',
+    Playing = 'PLAYING',
+    Buffering = 'BUFFERING'
 }
 
 export enum PlayableType {
@@ -26,6 +26,7 @@ export interface Playable {
     runtime: number;
     progress: number;
     subtitlesStatus: Status;
+    type: PlayableType;
 
     video(seek?: number) : string;
     subtitle() : string;
@@ -53,6 +54,7 @@ export class Movie implements Media, Playable {
     year: string;
     subtitlesStatus: Status;
     genres: string[];
+    type: PlayableType = PlayableType.Movie;
 
     video(seek?: number) : string {
         return `${Config.ApiUrl}/movies/play/${this.year}/${StringExtensions.toKebabCase(this.name)}?seek=${seek || 0}`;
@@ -99,6 +101,7 @@ export class Episode implements Playable {
     synopsis: string;
     subtitlesStatus: Status;
     airDate: string;
+    type: PlayableType = PlayableType.Episode;
 
     video(seek?: number) : string {
         return `${Config.ApiUrl}/shows/play/${this.show}/${this.season}/${this.number}?seek=${seek || 0}`;
@@ -152,12 +155,10 @@ export class PlayOptions {
 export class Castable {
     playable: Playable;
     options: PlayOptions;
-    type: PlayableType;
 
-    constructor(playable: Playable, options: PlayOptions, type: PlayableType) {
+    constructor(playable: Playable, options: PlayOptions) {
         this.playable = playable;
         this.options = options;
-        this.type = type;
     }
 }
 
