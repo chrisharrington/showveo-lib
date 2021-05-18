@@ -1,12 +1,13 @@
-export enum ErrorCode {
+export enum HttpStatus {
+    Success = 200,
     Unauthorized = 401,
     InternalError = 500
 }
 
 export class HttpError extends Error {
-    code: ErrorCode;
+    code: HttpStatus;
 
-    constructor(code: ErrorCode, message: string) {
+    constructor(code: HttpStatus, message: string) {
         super(message);
         
         this.code = code;

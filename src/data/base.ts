@@ -1,4 +1,4 @@
-import { ErrorCode, HttpError } from '../errors';
+import { HttpStatus, HttpError } from '../errors';
 
 export default class BaseService {
     async get(url: string, params?: any) : Promise<any> {
@@ -8,10 +8,10 @@ export default class BaseService {
             credentials: 'include'
         });
 
-        if (response.status === ErrorCode.InternalError)
-            throw new HttpError(ErrorCode.InternalError, response.body ? response.body.toString() : '');
-        if (response.status === ErrorCode.Unauthorized)
-            throw new HttpError(ErrorCode.Unauthorized, 'Unauthorized.');
+        if (response.status === HttpStatus.Unauthorized)
+            throw new HttpError(HttpStatus.Unauthorized, 'Unauthorized.');
+        if (response.status !== HttpStatus.Success)
+            throw new HttpError(response.status, response.body ? response.body.toString() : '');
 
         return await response.json();
     }
@@ -19,13 +19,21 @@ export default class BaseService {
     async post(url: string, params?: any, headers?: any) {
         headers = headers || {};
         headers['Content-Type'] = 'application/json';
-        return fetch(url, {
+        
+        const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
             headers: new Headers(headers),
             body: JSON.stringify(params),
             credentials: 'include'
         });
+
+        if (response.status === HttpStatus.Unauthorized)
+            throw new HttpError(HttpStatus.Unauthorized, 'Unauthorized.');
+        if (response.status !== HttpStatus.Success)
+            throw new HttpError(response.status, response.body ? response.body.toString() : '');
+
+        return response;
     }
 }
 
