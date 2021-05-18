@@ -22,10 +22,10 @@ var Status;
 })(Status = exports.Status || (exports.Status = {}));
 var CastState;
 (function (CastState) {
-    CastState["NoDevicesAvailable"] = "NoDevicesAvailable";
-    CastState["NotConnected"] = "NotConnected";
-    CastState["Connecting"] = "Connecting";
-    CastState["Connected"] = "Connected";
+    CastState["Idle"] = "IDLE";
+    CastState["Paused"] = "PAUSED";
+    CastState["Playing"] = "PLAYING";
+    CastState["Buffering"] = "BUFFERING";
 })(CastState = exports.CastState || (exports.CastState = {}));
 var PlayableType;
 (function (PlayableType) {
@@ -33,6 +33,9 @@ var PlayableType;
     PlayableType[PlayableType["Episode"] = 1] = "Episode";
 })(PlayableType = exports.PlayableType || (exports.PlayableType = {}));
 class Movie {
+    constructor() {
+        this.type = PlayableType.Movie;
+    }
     video(seek) {
         return `${config_1.default.ApiUrl}/movies/play/${this.year}/${extensions_1.StringExtensions.toKebabCase(this.name)}?seek=${seek || 0}`;
     }
@@ -58,6 +61,9 @@ class Season {
 }
 exports.Season = Season;
 class Episode {
+    constructor() {
+        this.type = PlayableType.Episode;
+    }
     video(seek) {
         return `${config_1.default.ApiUrl}/shows/play/${this.show}/${this.season}/${this.number}?seek=${seek || 0}`;
     }
@@ -99,10 +105,9 @@ class PlayOptions {
 }
 exports.PlayOptions = PlayOptions;
 class Castable {
-    constructor(playable, options, type) {
+    constructor(playable, options) {
         this.playable = playable;
         this.options = options;
-        this.type = type;
     }
 }
 exports.Castable = Castable;

@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpError = exports.ErrorCode = void 0;
-var ErrorCode;
-(function (ErrorCode) {
-    ErrorCode[ErrorCode["Unauthorized"] = 401] = "Unauthorized";
-    ErrorCode[ErrorCode["InternalError"] = 500] = "InternalError";
-})(ErrorCode = exports.ErrorCode || (exports.ErrorCode = {}));
+exports.HttpError = exports.HttpStatus = void 0;
+var HttpStatus;
+(function (HttpStatus) {
+    HttpStatus[HttpStatus["Success"] = 200] = "Success";
+    HttpStatus[HttpStatus["Unauthorized"] = 401] = "Unauthorized";
+    HttpStatus[HttpStatus["InternalError"] = 500] = "InternalError";
+})(HttpStatus = exports.HttpStatus || (exports.HttpStatus = {}));
 class HttpError extends Error {
     constructor(code, message) {
         super(message);

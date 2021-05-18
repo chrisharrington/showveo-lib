@@ -1,8 +1,9 @@
-export declare enum ErrorCode {
+export declare enum HttpStatus {
+    Success = 200,
     Unauthorized = 401,
     InternalError = 500
 }
 export declare class HttpError extends Error {
-    code: ErrorCode;
-    constructor(code: ErrorCode, message: string);
+    code: HttpStatus;
+    constructor(code: HttpStatus, message: string);
 }

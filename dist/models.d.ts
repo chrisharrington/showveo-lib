@@ -4,10 +4,10 @@ export declare enum Status {
     Fulfilled = "fulfilled"
 }
 export declare enum CastState {
-    NoDevicesAvailable = "NoDevicesAvailable",
-    NotConnected = "NotConnected",
-    Connecting = "Connecting",
-    Connected = "Connected"
+    Idle = "IDLE",
+    Paused = "PAUSED",
+    Playing = "PLAYING",
+    Buffering = "BUFFERING"
 }
 export declare enum PlayableType {
     Movie = 0,
@@ -18,6 +18,7 @@ export interface Playable {
     runtime: number;
     progress: number;
     subtitlesStatus: Status;
+    type: PlayableType;
     video(seek?: number): string;
     subtitle(): string;
     saveProgress(time: number): Promise<void>;
@@ -42,6 +43,7 @@ export declare class Movie implements Media, Playable {
     year: string;
     subtitlesStatus: Status;
     genres: string[];
+    type: PlayableType;
     video(seek?: number): string;
     subtitle(): string;
     saveProgress(time: number): Promise<void>;
@@ -73,6 +75,7 @@ export declare class Episode implements Playable {
     synopsis: string;
     subtitlesStatus: Status;
     airDate: string;
+    type: PlayableType;
     video(seek?: number): string;
     subtitle(): string;
     saveProgress(time: number): Promise<void>;
@@ -95,8 +98,7 @@ export declare class PlayOptions {
 export declare class Castable {
     playable: Playable;
     options: PlayOptions;
-    type: PlayableType;
-    constructor(playable: Playable, options: PlayOptions, type: PlayableType);
+    constructor(playable: Playable, options: PlayOptions);
 }
 export declare enum Navigation {
     Movies = "movies",

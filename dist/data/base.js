@@ -18,10 +18,10 @@ class BaseService {
                 mode: 'cors',
                 credentials: 'include'
             });
-            if (response.status === errors_1.ErrorCode.InternalError)
-                throw new errors_1.HttpError(errors_1.ErrorCode.InternalError, response.body ? response.body.toString() : '');
-            if (response.status === errors_1.ErrorCode.Unauthorized)
-                throw new errors_1.HttpError(errors_1.ErrorCode.Unauthorized, 'Unauthorized.');
+            if (response.status === errors_1.HttpStatus.Unauthorized)
+                throw new errors_1.HttpError(errors_1.HttpStatus.Unauthorized, 'Unauthorized.');
+            if (response.status !== errors_1.HttpStatus.Success)
+                throw new errors_1.HttpError(response.status, response.body ? response.body.toString() : '');
             return yield response.json();
         });
     }
@@ -29,13 +29,18 @@ class BaseService {
         return __awaiter(this, void 0, void 0, function* () {
             headers = headers || {};
             headers['Content-Type'] = 'application/json';
-            return fetch(url, {
+            const response = yield fetch(url, {
                 method: 'POST',
                 mode: 'cors',
                 headers: new Headers(headers),
                 body: JSON.stringify(params),
                 credentials: 'include'
             });
+            if (response.status === errors_1.HttpStatus.Unauthorized)
+                throw new errors_1.HttpError(errors_1.HttpStatus.Unauthorized, 'Unauthorized.');
+            if (response.status !== errors_1.HttpStatus.Success)
+                throw new errors_1.HttpError(response.status, response.body ? response.body.toString() : '');
+            return response;
         });
     }
 }

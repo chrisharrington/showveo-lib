@@ -25,9 +25,9 @@ class DeviceService extends base_1.default {
                 url: castable.playable.video(),
                 host: castable.options.device.host
             };
-            if (castable.type === models_1.PlayableType.Movie)
+            if (castable.playable.type === models_1.PlayableType.Movie)
                 params.movieId = castable.playable._id;
-            else if (castable.type === models_1.PlayableType.Episode)
+            else if (castable.playable.type === models_1.PlayableType.Episode)
                 params.episodeId = castable.playable._id;
             yield this.post(`${config_1.default.ApiUrl}/devices/cast`, params);
         });
