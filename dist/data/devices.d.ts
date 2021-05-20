@@ -6,6 +6,7 @@ declare class DeviceService extends BaseService {
     pause(device: Device): Promise<void>;
     play(device: Device): Promise<void>;
     stop(device: Device): Promise<void>;
+    seek(device: Device, time: number): Promise<void>;
     private build;
 }
 declare const _default: DeviceService;

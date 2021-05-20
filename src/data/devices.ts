@@ -35,6 +35,10 @@ class DeviceService extends BaseService {
         await this.post(`${Config.ApiUrl}/devices/stop`, { host: device.host });
     }
 
+    async seek(device: Device, time: number) {
+        await this.post(`${Config.ApiUrl}/devices/seek`, { host: device.host, time });
+    }
+
     private build(data: any) : Device {
         const show = new Device();
         Object.keys(data).forEach(k => show[k] = data[k]);

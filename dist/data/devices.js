@@ -47,6 +47,11 @@ class DeviceService extends base_1.default {
             yield this.post(`${config_1.default.ApiUrl}/devices/stop`, { host: device.host });
         });
     }
+    seek(device, time) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.post(`${config_1.default.ApiUrl}/devices/seek`, { host: device.host, time });
+        });
+    }
     build(data) {
         const show = new models_1.Device();
         Object.keys(data).forEach(k => show[k] = data[k]);
