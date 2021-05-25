@@ -27,8 +27,8 @@ class DeviceService extends BaseService {
         await this.post(`${Config.ApiUrl}/devices/pause`, { host: device.host });
     }
 
-    async play(device: Device) {
-        await this.post(`${Config.ApiUrl}/devices/play`, { host: device.host });
+    async unpause(device: Device) {
+        await this.post(`${Config.ApiUrl}/devices/unpause`, { host: device.host });
     }
 
     async stop(device: Device) {
@@ -40,9 +40,9 @@ class DeviceService extends BaseService {
     }
 
     private build(data: any) : Device {
-        const show = new Device();
-        Object.keys(data).forEach(k => show[k] = data[k]);
-        return show;
+        const built = new Device();
+        Object.keys(data).forEach(k => built[k] = data[k]);
+        return built;
     }
 }
 

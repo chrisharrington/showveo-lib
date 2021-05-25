@@ -86,6 +86,7 @@ export declare class Device {
     name: string;
     host: string;
     isThisDevice: boolean;
+    castable: Castable | null;
     constructor();
     static thisDevice(): Device;
 }

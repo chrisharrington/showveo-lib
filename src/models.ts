@@ -125,6 +125,7 @@ export class Device {
     name: string;
     host: string;
     isThisDevice: boolean;
+    castable: Castable | null;
 
     constructor() {
         this.isThisDevice = false;

@@ -37,9 +37,9 @@ class DeviceService extends base_1.default {
             yield this.post(`${config_1.default.ApiUrl}/devices/pause`, { host: device.host });
         });
     }
-    play(device) {
+    unpause(device) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.post(`${config_1.default.ApiUrl}/devices/play`, { host: device.host });
+            yield this.post(`${config_1.default.ApiUrl}/devices/unpause`, { host: device.host });
         });
     }
     stop(device) {
@@ -53,9 +53,9 @@ class DeviceService extends base_1.default {
         });
     }
     build(data) {
-        const show = new models_1.Device();
-        Object.keys(data).forEach(k => show[k] = data[k]);
-        return show;
+        const built = new models_1.Device();
+        Object.keys(data).forEach(k => built[k] = data[k]);
+        return built;
     }
 }
 exports.default = new DeviceService();
