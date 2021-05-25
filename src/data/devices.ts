@@ -39,6 +39,14 @@ class DeviceService extends BaseService {
         await this.post(`${Config.ApiUrl}/devices/seek`, { host: device.host, time });
     }
 
+    async enableSubtitles(device: Device) {
+        await this.post(`${Config.ApiUrl}/devices/enable-subtitles`, { host: device.host });
+    }
+
+    async disableSubtitles(device: Device) {
+        await this.post(`${Config.ApiUrl}/devices/disable-subtitles`, { host: device.host });
+    }
+
     private build(data: any) : Device {
         const built = new Device();
         Object.keys(data).forEach(k => built[k] = data[k]);

@@ -52,6 +52,16 @@ class DeviceService extends base_1.default {
             yield this.post(`${config_1.default.ApiUrl}/devices/seek`, { host: device.host, time });
         });
     }
+    enableSubtitles(device) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.post(`${config_1.default.ApiUrl}/devices/enable-subtitles`, { host: device.host });
+        });
+    }
+    disableSubtitles(device) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.post(`${config_1.default.ApiUrl}/devices/disable-subtitles`, { host: device.host });
+        });
+    }
     build(data) {
         const built = new models_1.Device();
         Object.keys(data).forEach(k => built[k] = data[k]);
